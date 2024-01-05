@@ -1,0 +1,23 @@
+{
+    "apiError": {
+        "authTokenExpired": "Bearer token has expired"
+    },
+    "error": {
+        "nothingFound": "Nada Encontrado"
+    },
+    "general": {},
+    "instruction": {
+        "underProgress": "En progreso"
+    },
+    "label": {
+        "loginHere": "Inicia sesión aquí",
+        "signinToYourAccount": "Inicia sesión en tu cuenta",
+        "signin": "Iniciar sesión",
+        "signinWithGoogle": "Inicia sesión con Google",
+        "WelcomeCarouselDescription1": "WelcomeCarouselDescription1",
+        "WelcomeCarouselDescription2": "WelcomeCarouselDescription1",
+        "WelcomeCarouselDescription3": "WelcomeCarouselDescription1",
+        "WelcomeCarouselDescription4": "WelcomeCarouselDescription1",
+        "WelcomeCarouselDescription5": "WelcomeCarouselDescription1"
+    }
+}
