@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import StorageHelper, { StorageKeys } from '../../utils/StorageHelper';
 import { useFirstTimeAppOpen } from '../../hooks';
 import { LoginScreen, OnboardingScreen } from '../screens/auth';
-import { HomeScreen, SettingsScreen, EditProfileScreen } from '../screens';
+import { HomeScreen, BlogsScreen, SettingsScreen, EditProfileScreen } from '../screens';
 import { AppError } from '../../utils/error/app-error';
 import { setAppLanguage } from '../../stores/auth/AuthActions';
 import { LocaleProvider } from '../../localisations/locale-provider';
@@ -164,6 +164,11 @@ const TabsNavigator = () => {
                 name={focused ? AppIconName.homeFilled : AppIconName.home}
                 color={color}
               />;
+            case 'BlogsScreen':
+              return <AppIcon
+                name={focused ? AppIconName.portfolioFilled : AppIconName.portfolio}
+                color={color}
+              />;
             case 'ProfileScreen':
               return <AppIcon
                 name={focused ? AppIconName.portfolioFilled : AppIconName.portfolio}
@@ -176,6 +181,7 @@ const TabsNavigator = () => {
       })}
     >
       <MainTabs.Screen name="HomeScreen" component={HomeScreen} options={{ tabBarLabel: LocaleProvider.formatMessage(LocaleProvider.IDs.label.home) }} />
+      <MainTabs.Screen name="BlogsScreen" component={BlogsScreen} options={{ tabBarLabel: LocaleProvider.formatMessage(LocaleProvider.IDs.label.blogs) }} />
       <MainTabs.Screen
         name="ProfileScreen"
         component={ProfileStack}

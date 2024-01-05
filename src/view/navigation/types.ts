@@ -8,5 +8,6 @@ export type MainStackParamList = {
 
 export type MainBottomTabsParamList = {
   HomeScreen: undefined;
+  BlogsScreen: undefined;
   ProfileScreen: undefined;
 };
