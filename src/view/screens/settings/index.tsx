@@ -15,6 +15,7 @@ import { LocaleProvider } from '../../../localisations/locale-provider';
 import { FormattedMessage } from '../../../localisations/locale-formatter';
 import { AppIconName, AppIconSize } from '../../components/icon/types';
 import { logoutUser, setAppLanguage } from '../../../stores/auth/AuthActions';
+import { navigationRef } from '../../navigation';
 
 export const SettingsScreen = injectIntl((props) => {
     const { user } = useSelector(({ Homfford }: any) => Homfford.auth);
@@ -211,7 +212,7 @@ export const SettingsScreen = injectIntl((props) => {
                                     <FormattedMessage id={LocaleProvider.IDs.label.profile} />
                                 </AppText>
                             </View>
-                            <View style={styles.editButtonContainer}>
+                            <TouchableOpacity onPress={() => navigationRef.navigate('EditProfileScreen')} style={styles.editButtonContainer}>
                                 <AppIcon
                                     name={AppIconName.editPen}
                                     color={Colors.brand['DEFAULT']}
@@ -220,7 +221,7 @@ export const SettingsScreen = injectIntl((props) => {
                                 <AppText style={styles.editLabel}>
                                     <FormattedMessage id={LocaleProvider.IDs.label.edit} />
                                 </AppText>
-                            </View>
+                            </TouchableOpacity>
                         </SafeAreaView>
 
                         <View style={styles.profileDetailsContainer}>

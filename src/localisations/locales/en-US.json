@@ -3,7 +3,9 @@
         "authTokenExpired": "Bearer token has expired"
     },
     "error": {
-        "nothingFound": "Nothing Found"
+        "nothingFound": "Nothing Found",
+        "addressIsInvalid": "Address is invalid",
+        "genderIsInvalid": "Gender is invalid"
     },
     "general": {
         "skip": "Skip",
@@ -18,9 +20,13 @@
         "signin": "Sign in",
         "firebaseTest": "Firebase Test",
         "signinWithGoogle": "Sign in with google",
+        "editProfile": "Edit profile",
         "language": "Language",
         "edit": "Edit",
+        "genderWithSterek": "Gender*",
         "profile": "Profile",
+        "submit": "Submit",
+        "enterYourAddress": "Enter your address*",
         "english": "English",
         "spain": "Español",
         "logout": "Logout",

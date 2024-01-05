@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import StorageHelper, { StorageKeys } from '../../utils/StorageHelper';
 import { useFirstTimeAppOpen } from '../../hooks';
 import { LoginScreen, OnboardingScreen } from '../screens/auth';
-import { HomeScreen, SettingsScreen } from '../screens';
+import { HomeScreen, SettingsScreen, EditProfileScreen } from '../screens';
 
 const MainAppStack = createNativeStackNavigator<MainStackParamList>();
 const MainTabs = createBottomTabNavigator<MainBottomTabsParamList>();
@@ -111,6 +111,24 @@ const AuthFlow = (
   </MainAppStack.Group>
 );
 
+const ProfileStack = () => (
+  <MainAppStack.Navigator screenOptions={{
+    headerShown: false,
+  }} initialRouteName="SettingsScreen">
+    <MainAppStack.Screen
+      name="SettingsScreen"
+      component={SettingsScreen}
+    />
+    <MainAppStack.Screen
+      name="EditProfileScreen"
+      component={EditProfileScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+  </MainAppStack.Navigator>
+);
+
 /**
  * Define Tab navigator
  */
@@ -129,7 +147,7 @@ const TabsNavigator = () => {
                 name={focused ? AppIconName.homeFilled : AppIconName.home}
                 color={color}
               />;
-            case 'SettingsScreen':
+            case 'ProfileScreen':
               return <AppIcon
                 name={focused ? AppIconName.portfolioFilled : AppIconName.portfolio}
                 color={color}
@@ -142,8 +160,8 @@ const TabsNavigator = () => {
     >
       <MainTabs.Screen name="HomeScreen" component={HomeScreen} options={{ tabBarLabel: "Home" }} />
       <MainTabs.Screen
-        name="SettingsScreen"
-        component={SettingsScreen}
+        name="ProfileScreen"
+        component={ProfileStack}
         options={{
           tabBarLabel: "Settings",
         }}

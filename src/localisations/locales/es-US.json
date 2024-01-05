@@ -3,7 +3,9 @@
         "authTokenExpired": "Bearer token has expired"
     },
     "error": {
-        "nothingFound": "Nada Encontrado"
+        "nothingFound": "Nada Encontrado",
+        "addressIsInvalid": "La dirección no es válida",
+        "genderIsInvalid": "El género no es válido"
     },
     "general": {},
     "instruction": {
@@ -14,9 +16,13 @@
         "signinToYourAccount": "Inicia sesión en tu cuenta",
         "signin": "Iniciar sesión",
         "firebaseTest": "Prueba de base de fuego",
+        "editProfile": "Editar perfil",
         "language": "Idioma",
         "edit": "Editar",
         "profile": "Perfil",
+        "submit": "Inscribirse",
+        "enterYourAddress": "Ingresa tu dirección*",
+        "genderWithSterek": "Género*",
         "english": "Inglés",
         "spain": "Español",
         "logout": "Cerrar sesión",

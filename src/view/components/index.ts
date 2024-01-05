@@ -9,3 +9,5 @@ export * from './divider';
 export * from './auth-input';
 export * from './dropdown-list-modal';
 export * from './switch';
+export * from './drop-down-picker';
+export * from './textarea';

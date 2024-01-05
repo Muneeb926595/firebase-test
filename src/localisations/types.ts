@@ -81,6 +81,8 @@ export interface IMessageGroup {}
 
 export interface IErrorMessages extends IMessageGroup {
   readonly nothingFound: string;
+  readonly addressIsInvalid: string;
+  readonly genderIsInvalid: string;
 }
 
 export interface IInstructionMessages extends IMessageGroup {
@@ -100,11 +102,15 @@ export interface ILabelTexts extends IMessageGroup {
   readonly firebaseTest: string;
   readonly language: string;
   readonly edit: string;
+  readonly editProfile: string;
   readonly profile: string;
   readonly english: string;
   readonly spain: string;
+  readonly submit: string;
+  readonly enterYourAddress: string;
   readonly logout: string;
   readonly deleteAccount: string;
+  readonly genderWithSterek: string;
 }
 
 export interface IGeneralMessages extends IMessageGroup {
