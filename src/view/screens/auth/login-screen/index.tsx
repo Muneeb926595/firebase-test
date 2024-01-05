@@ -10,8 +10,9 @@ import { SvgXml } from 'react-native-svg'
 import { googleLogoIcon } from '../../../components/icon/custome-icons'
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import { useDispatch } from 'react-redux'
-import { loginUser } from '../../../../stores/auth/AuthActions'
+import { loginUser, } from '../../../../stores/auth/AuthActions'
 
 GoogleSignin.configure({
   webClientId: '1078838042725-e70s3mc18enegk6fupv1rgf9iesloobu.apps.googleusercontent.com',
@@ -20,14 +21,31 @@ GoogleSignin.configure({
 export const LoginScreen = (props: ScreenProps<'LoginScreen'>) => {
   const dispatch = useDispatch()
   useEffect(() => {
-    const unsubscribeAuth = auth().onAuthStateChanged((authUser) => {
+    const unsubscribeAuth = auth().onAuthStateChanged(async (authUser) => {
       if (authUser) {
         dispatch(loginUser(authUser) as any)
+        await createUserInFirestore(authUser?.uid, authUser?.displayName, authUser?.email);
       }
     });
 
     return () => unsubscribeAuth();
   }, []);
+
+  const createUserInFirestore = async (userId, displayName, email) => {
+    try {
+      const userDoc = await firestore().collection('users').doc(userId).get();
+      if (!userDoc.exists) {
+        // Create user document in Firestore
+        await firestore().collection('users').doc(userId).set({
+          displayName,
+          email,
+        });
+      }
+    } catch (error) {
+      console.error('Error creating user in Firestore:', error);
+    }
+  };
+
   const handleGoogleSignIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();

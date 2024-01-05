@@ -6,6 +6,7 @@ export const loginUser = user => {
       userName: user?.displayName,
       email: user?.email,
       profileImage: user?.photoURL,
+      uid: user?.uid,
     };
     dispatch({
       type: AuthActionTypes.LOGIN_USER,

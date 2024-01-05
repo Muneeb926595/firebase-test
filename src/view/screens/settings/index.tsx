@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Image, Modal, SafeAreaView, TouchableOpacity, View } from 'react-native';
-import { useDispatch, } from 'react-redux';
+import { useDispatch, useSelector, } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import RNRestart from 'react-native-restart'; // Import package from node modules
 
@@ -8,6 +8,8 @@ import { styles } from './styles';
 import { ApplicationSettings, Languages } from './types';
 import { AppIcon, AppText, Container, Divider, DropDownListModal, SwitchBtn } from '../../components';
 import { Colors, Layout } from '../../../globals';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 import StorageHelper, { StorageKeys } from '../../../utils/StorageHelper';
 import { LocaleProvider } from '../../../localisations/locale-provider';
 import { FormattedMessage } from '../../../localisations/locale-formatter';
@@ -15,9 +17,10 @@ import { AppIconName, AppIconSize } from '../../components/icon/types';
 import { logoutUser, setAppLanguage } from '../../../stores/auth/AuthActions';
 
 export const SettingsScreen = injectIntl((props) => {
+    const { user } = useSelector(({ Homfford }: any) => Homfford.auth);
+
     const [locationSwitchValue, setLocationSwitchValue] = useState(false)
     const [isLanguagesModalVisible, setIsLanguagesModalVisible] = useState<boolean>(false)
-    const [isCurrencyModalVisible, setIsCurrencyModalVisible] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const [supportedLanguages, setSupportedLanguages] = useState([
@@ -100,12 +103,28 @@ export const SettingsScreen = injectIntl((props) => {
     }, [])
 
 
+    const handleDeleteAccount = async () => {
+        try {
+            // Delete user account in Firebase Authentication
+            await auth().currentUser.delete();
+
+            // Delete user document in Firestore
+            await firestore().collection('users').doc(user?.uid).delete();
+
+            // After deleting, sign out the user
+            await auth().signOut();
+        } catch (error) {
+            console.error('Error deleting account:', error);
+        }
+    };
+
     const doSelectedOperation = async (selectedOp: string) => {
         switch (selectedOp) {
             case ApplicationSettings.Language:
                 setIsLanguagesModalVisible(true)
                 break;
             case ApplicationSettings.DeleteAccount:
+                handleDeleteAccount()
                 break;
             case ApplicationSettings.Logout:
                 dispatch(logoutUser() as any)
@@ -206,25 +225,15 @@ export const SettingsScreen = injectIntl((props) => {
 
                         <View style={styles.profileDetailsContainer}>
                             <Image
-                                source={{ uri: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlciUyMGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D" }}
+                                source={{ uri: user?.profileImage }}
                                 style={styles.profilePic}
                             />
 
                             <View style={styles.profileDetails}>
                                 <AppText style={styles.userName}>
-                                    Mathew Adam
+                                    {user?.userName}
                                 </AppText>
 
-                                <View style={styles.profileDetailsItemContainer}>
-                                    <AppIcon
-                                        name={AppIconName.phone}
-                                        color={Colors.white}
-                                        iconSize={AppIconSize.small}
-                                    />
-                                    <AppText style={styles.profileDetailsItemLabel}>
-                                        +62 112-3288-9111
-                                    </AppText>
-                                </View>
                                 <View style={styles.profileDetailsItemContainer}>
                                     <AppIcon
                                         name={AppIconName.email}
@@ -232,7 +241,7 @@ export const SettingsScreen = injectIntl((props) => {
                                         iconSize={AppIconSize.small}
                                     />
                                     <AppText style={styles.profileDetailsItemLabel}>
-                                        Mathew@email.com
+                                        {user?.email}
                                     </AppText>
                                 </View>
                                 <View style={styles.profileDetailsItemContainer}>
