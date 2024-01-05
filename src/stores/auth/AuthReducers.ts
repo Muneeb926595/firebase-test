@@ -33,6 +33,13 @@ const AuthReducer = (
         loading: false,
       };
     }
+    case AuthActionTypes.UPDATE_USER: {
+      return {
+        ...state,
+        user: {...state.user, ...action.payload},
+        loading: false,
+      };
+    }
     case AuthActionTypes.SET_APP_LANGUAGE: {
       return {
         ...state,

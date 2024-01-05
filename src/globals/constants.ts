@@ -13,7 +13,7 @@ class _Constants {
   readonly REGEX_EMAIL =
     /^\s*\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.[a-zA-Z0-9\-]{2,})+\s*$/;
   readonly REGEX_FULL_NAME = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
-  readonly REGEX_AGE = /^(?:[1-9][0-9]?|1[01][0-9]|120)$  /;
+  readonly REGEX_AGE = /^(?:[1-9][0-9]?|1[01][0-9]|120)$/;
 
   readonly DATE_MONTH_YEAR_FORMATE_DASHED = 'DD-MM-YYYY';
   readonly DATE_MONTH_YEAR_FORMATE_SLASHED = 'DD/MM/YYYY';

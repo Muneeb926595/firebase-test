@@ -10,6 +10,7 @@ import { FormattedMessage } from '../../../localisations/locale-formatter'
 import { LocaleProvider } from '../../../localisations/locale-provider'
 import firestore from '@react-native-firebase/firestore';
 import { navigationRef } from '../../navigation'
+import { updateUser } from '../../../stores/auth/AuthActions'
 
 export const genderDropDownList = [
     {
@@ -47,6 +48,12 @@ export const EditProfileScreen = (props: ScreenProps<'EditProfileScreen'>) => {
                 address: data?.address?.trim(),
                 gender: data?.gender,
             });
+
+            dispatch(updateUser({
+                age: data?.age?.trim(),
+                address: data?.address?.trim(),
+                gender: data?.gender,
+            }) as any)
         } catch (error) {
             console.error('Error updating user fields in Firestore:', error);
         }

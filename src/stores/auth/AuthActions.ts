@@ -15,6 +15,15 @@ export const loginUser = user => {
   };
 };
 
+export const updateUser = user => {
+  return dispatch => {
+    dispatch({
+      type: AuthActionTypes.UPDATE_USER,
+      payload: user,
+    });
+  };
+};
+
 export const logoutUser = () => {
   return dispatch => {
     dispatch({

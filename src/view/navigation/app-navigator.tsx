@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import _ from 'lodash';
 
-import { Colors } from '../../globals';
+import { Colors, Constants } from '../../globals';
 import { linkingConfigs } from './deep-links'
 
 import { navigationRef } from './navigation-utils';
@@ -16,6 +16,9 @@ import StorageHelper, { StorageKeys } from '../../utils/StorageHelper';
 import { useFirstTimeAppOpen } from '../../hooks';
 import { LoginScreen, OnboardingScreen } from '../screens/auth';
 import { HomeScreen, SettingsScreen, EditProfileScreen } from '../screens';
+import { AppError } from '../../utils/error/app-error';
+import { setAppLanguage } from '../../stores/auth/AuthActions';
+import { LocaleProvider } from '../../localisations/locale-provider';
 
 const MainAppStack = createNativeStackNavigator<MainStackParamList>();
 const MainTabs = createBottomTabNavigator<MainBottomTabsParamList>();
@@ -36,6 +39,20 @@ export const AppNavigator = () => {
   const handleNavContainerReady = () => {
     routeNameRef.current = navigationRef.getCurrentRoute()?.name;
   };
+
+  // load app language in global store
+  useEffect(() => {
+    (async () => {
+      let appLocale = Constants.DEFAULT_APP_LOCALE;
+      try {
+        appLocale = await StorageHelper.getItem(StorageKeys.SELECTED_APP_LANGUAGE) as string;
+      } catch (e) {
+        throw new AppError('App.tsx', 'initLocaleProvider', e);
+      }
+      appLocale = appLocale || Constants.DEFAULT_APP_LOCALE
+      dispatch(setAppLanguage(appLocale) as any)
+    })();
+  }, [])
 
   const handleNavStateChanged = () => {
     const previousRouteName = routeNameRef.current;
@@ -158,12 +175,12 @@ const TabsNavigator = () => {
         },
       })}
     >
-      <MainTabs.Screen name="HomeScreen" component={HomeScreen} options={{ tabBarLabel: "Home" }} />
+      <MainTabs.Screen name="HomeScreen" component={HomeScreen} options={{ tabBarLabel: LocaleProvider.formatMessage(LocaleProvider.IDs.label.home) }} />
       <MainTabs.Screen
         name="ProfileScreen"
         component={ProfileStack}
         options={{
-          tabBarLabel: "Settings",
+          tabBarLabel: LocaleProvider.formatMessage(LocaleProvider.IDs.label.settings),
         }}
       />
     </MainTabs.Navigator>

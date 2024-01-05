@@ -108,6 +108,8 @@ export interface ILabelTexts extends IMessageGroup {
   readonly profile: string;
   readonly english: string;
   readonly spain: string;
+  readonly home: string;
+  readonly settings: string;
   readonly submit: string;
   readonly enterYourAddress: string;
   readonly logout: string;

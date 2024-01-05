@@ -12,6 +12,8 @@ import { AppNavigator } from './view/navigation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { MagicSheetPortal } from 'react-native-magic-sheet';
 import store from './stores';
+import StorageHelper, { StorageKeys } from './utils/StorageHelper';
+import { AppError } from './utils/error/app-error';
 
 
 
@@ -30,8 +32,12 @@ export default function App() {
    * Setup and init Locale provider, api, and repositories
    */
   const initAppAssets = async () => {
-    //setup local provider
     let appLocale = Constants.DEFAULT_APP_LOCALE;
+    try {
+      appLocale = await StorageHelper.getItem(StorageKeys.SELECTED_APP_LANGUAGE) as string;
+    } catch (e) {
+      throw new AppError('App.tsx', 'initLocaleProvider', e);
+    }
     await LocaleProvider.init(appLocale);
   };
 

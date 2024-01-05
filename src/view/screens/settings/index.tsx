@@ -245,16 +245,36 @@ export const SettingsScreen = injectIntl((props) => {
                                         {user?.email}
                                     </AppText>
                                 </View>
-                                <View style={styles.profileDetailsItemContainer}>
+                                {user?.age && <View style={styles.profileDetailsItemContainer}>
                                     <AppIcon
                                         name={AppIconName.locationPinUnfilled}
                                         color={Colors.white}
                                         iconSize={AppIconSize.small}
                                     />
                                     <AppText style={styles.profileDetailsItemLabel}>
-                                        13th Street. 47 W 13th St, NY 10011
+                                        {user?.age}
                                     </AppText>
-                                </View>
+                                </View>}
+                                {user?.gender && <View style={styles.profileDetailsItemContainer}>
+                                    <AppIcon
+                                        name={AppIconName.locationPinUnfilled}
+                                        color={Colors.white}
+                                        iconSize={AppIconSize.small}
+                                    />
+                                    <AppText style={styles.profileDetailsItemLabel}>
+                                        {user?.gender}
+                                    </AppText>
+                                </View>}
+                                {user?.address && <View style={styles.profileDetailsItemContainer}>
+                                    <AppIcon
+                                        name={AppIconName.locationPinUnfilled}
+                                        color={Colors.white}
+                                        iconSize={AppIconSize.small}
+                                    />
+                                    <AppText style={styles.profileDetailsItemLabel}>
+                                        {user?.address}
+                                    </AppText>
+                                </View>}
                             </View>
                         </View>
                     </View>
