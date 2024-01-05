@@ -10,15 +10,20 @@ import { SvgXml } from 'react-native-svg'
 import { googleLogoIcon } from '../../../components/icon/custome-icons'
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import auth from '@react-native-firebase/auth';
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../../../../stores/auth/AuthActions'
 
 GoogleSignin.configure({
   webClientId: '1078838042725-e70s3mc18enegk6fupv1rgf9iesloobu.apps.googleusercontent.com',
 });
 
 export const LoginScreen = (props: ScreenProps<'LoginScreen'>) => {
+  const dispatch = useDispatch()
   useEffect(() => {
     const unsubscribeAuth = auth().onAuthStateChanged((authUser) => {
-      console.log("authUser", authUser)
+      if (authUser) {
+        dispatch(loginUser(authUser) as any)
+      }
     });
 
     return () => unsubscribeAuth();

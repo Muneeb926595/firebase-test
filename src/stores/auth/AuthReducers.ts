@@ -1,5 +1,5 @@
-import { AuthActionTypes } from './../redux/actionTypes';
-import { AuthState } from '../redux/state';
+import {AuthActionTypes} from './../redux/actionTypes';
+import {AuthState} from '../redux/state';
 
 const INITIAL_STATE: AuthState = {
   user: {},
@@ -15,21 +15,19 @@ const AuthReducer = (
   action: Action,
 ): AuthState => {
   switch (action.type) {
-    case AuthActionTypes.LOGIN_USER_START: {
-      return { ...state, loading: true };
-    }
-    case AuthActionTypes.LOGIN_USER_SUCCESS: {
+    case AuthActionTypes.LOGIN_USER: {
       return {
         ...state,
         authenticated: true,
-        user: action.payload.user,
+        user: action.payload,
         loading: false,
       };
     }
-    case AuthActionTypes.LOGIN_USER_FAIL: {
+    case AuthActionTypes.LOGOUT_USER: {
       return {
         ...state,
         authenticated: false,
+        user: null,
         loading: false,
       };
     }
