@@ -112,8 +112,7 @@ export const SettingsScreen = injectIntl((props) => {
             // Delete user document in Firestore
             await firestore().collection('users').doc(user?.uid).delete();
 
-            // After deleting, sign out the user
-            await auth().signOut();
+            dispatch(logoutUser() as any)
         } catch (error) {
             console.error('Error deleting account:', error);
         }
