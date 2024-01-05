@@ -30,7 +30,11 @@ export const TextArea = ({ placeholder, onChange, maxLength, selectionColor, onB
     };
 
     const getInputBackgroundColor = () => {
-        return isError ? `${Colors.red}20` : Colors.transparent
+        return isError ? `${Colors.actions['DEFAULT']}20` : isFocused ? `${Colors.brand['DEFAULT']}20` : Colors.surface['400']
+    }
+
+    const getInputBorderColor = () => {
+        return isError ? Colors.actions['DEFAULT'] : isFocused ? Colors.brand['DEFAULT'] : Colors.transparent
     }
 
     return (
@@ -49,10 +53,10 @@ export const TextArea = ({ placeholder, onChange, maxLength, selectionColor, onB
             style={[
                 styles.textArea,
                 {
-                    borderColor: isError ? Colors.red : isFocused ? Colors.brand['DEFAULT'] : Colors.surface['DEFAULT'],
-                    backgroundColor: getInputBackgroundColor()
+                    borderColor: getInputBorderColor(),
+                    backgroundColor: getInputBackgroundColor(),
                 },
-                customStyles
+                customStyles,
             ]}
         />
     );

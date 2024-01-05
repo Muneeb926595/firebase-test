@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
 import { useDispatch, } from 'react-redux'
 import { ScreenProps } from '../types'
-import { AppDropDownPicker, AppText, Button, Container, TextArea } from '../../components'
+import { AppDropDownPicker, AppText, AuthInput, Button, Container, TextArea } from '../../components'
 import { Colors, Constants, Layout, } from '../../../globals'
 import { FormattedMessage } from '../../../localisations/locale-formatter'
 import { LocaleProvider } from '../../../localisations/locale-provider'
@@ -30,6 +30,7 @@ export const EditProfileScreen = (props: ScreenProps<'EditProfileScreen'>) => {
 
     const { control, handleSubmit, formState: { errors }, watch } = useForm({
         defaultValues: {
+            age: '',
             address: '',
             gender: '',
         }
@@ -54,6 +55,27 @@ export const EditProfileScreen = (props: ScreenProps<'EditProfileScreen'>) => {
                     <AppText style={styles.appname}>
                         <FormattedMessage id={LocaleProvider.IDs.label.editProfile} />
                     </AppText>
+
+                    <Controller
+                        control={control}
+                        rules={{
+                            pattern: Constants.REGEX_AGE,
+                            required: true,
+                        }}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <AuthInput
+                                value={value}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                isError={errors?.age}
+                                placeholder={LocaleProvider.formatMessage(LocaleProvider.IDs.label.enterYourAge)}
+                            />
+                        )}
+                        name="age"
+                    />
+                    {errors?.age && <AppText style={styles.error} >
+                        <FormattedMessage id={LocaleProvider.IDs.error.ageIsInvalid} />
+                    </AppText>}
 
                     <Controller
                         control={control}
@@ -102,7 +124,7 @@ export const EditProfileScreen = (props: ScreenProps<'EditProfileScreen'>) => {
                         <Button
                             buttonLable={LocaleProvider.formatMessage(LocaleProvider.IDs.label.submit)}
                             onPress={handleSubmit(handleRegister)}
-                            buttonContainer={{ margin: Layout.zero, marginTop: Layout.zero, backgroundColor: Colors.black }}
+                            buttonContainer={{ margin: Layout.zero, marginTop: Layout.zero, backgroundColor: Colors.brand['DEFAULT'] }}
                             btnLabelStyles={{ color: Colors.white }}
                         />
                     </View>

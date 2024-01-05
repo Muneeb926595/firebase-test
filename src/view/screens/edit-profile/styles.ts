@@ -4,7 +4,7 @@ import {Colors, Fonts, Layout} from '../../../globals';
 export const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: Colors.background},
   screenContent: {
-    marginTop: Layout.heightPercentageToDP(4),
+    marginTop: Layout.heightPercentageToDP(2),
   },
   subtitle: {
     ...Fonts.poppinsRegular,
@@ -14,7 +14,9 @@ export const styles = StyleSheet.create({
   },
   appname: {
     ...Fonts.poppinsBold,
-    fontSize: Layout.RFValue(30),
+    color: Colors.brand['DEFAULT'],
+    fontSize: Layout.RFValue(28),
+    marginBottom: Layout.heightPercentageToDP(1.8),
   },
   input: {
     borderRadius: Layout.widthPercentageToDP(

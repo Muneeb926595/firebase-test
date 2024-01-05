@@ -5,6 +5,7 @@
     "error": {
         "nothingFound": "Nothing Found",
         "addressIsInvalid": "Address is invalid",
+        "ageIsInvalid": "Age is invalid",
         "genderIsInvalid": "Gender is invalid"
     },
     "general": {
@@ -18,8 +19,9 @@
         "loginHere": "Login here",
         "signinToYourAccount": "Sign in to your account",
         "signin": "Sign in",
-        "firebaseTest": "Firebase Test",
         "signinWithGoogle": "Sign in with google",
+        "firebaseTest": "Firebase Test",
+        "enterYourAge": "Enter your age",
         "editProfile": "Edit profile",
         "language": "Language",
         "edit": "Edit",

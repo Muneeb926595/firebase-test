@@ -5,6 +5,7 @@
     "error": {
         "nothingFound": "Nada Encontrado",
         "addressIsInvalid": "La dirección no es válida",
+        "ageIsInvalid": "La edad no es válida",
         "genderIsInvalid": "El género no es válido"
     },
     "general": {},
@@ -16,6 +17,7 @@
         "signinToYourAccount": "Inicia sesión en tu cuenta",
         "signin": "Iniciar sesión",
         "firebaseTest": "Prueba de base de fuego",
+        "enterYourAge": "Introduzca su edad",
         "editProfile": "Editar perfil",
         "language": "Idioma",
         "edit": "Editar",

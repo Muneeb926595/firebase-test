@@ -31,6 +31,9 @@ export const AppDropDownPicker = ({ value, isError, onSelectItem, dropDownList, 
             value={value}
             items={dropDownList}
             placeholder={placeholder}
+            placeholderStyle={{
+                color: Colors.typography['100']
+            }}
             setOpen={setOpen}
             setValue={() => { }}
             onSelectItem={(item) => onSelectItem(item?.value)}
