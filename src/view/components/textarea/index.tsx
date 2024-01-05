@@ -37,6 +37,9 @@ export const TextArea = ({ placeholder, onChange, maxLength, selectionColor, onB
         return isError ? Colors.actions['DEFAULT'] : isFocused ? Colors.brand['DEFAULT'] : Colors.transparent
     }
 
+    const getInputTextColor = () => {
+        return value?.length > 0 ? Colors.typography['DEFAULT'] : Colors.surface['500']
+    }
     return (
         <TextInput
             value={value}
@@ -55,6 +58,7 @@ export const TextArea = ({ placeholder, onChange, maxLength, selectionColor, onB
                 {
                     borderColor: getInputBorderColor(),
                     backgroundColor: getInputBackgroundColor(),
+                    color: getInputTextColor()
                 },
                 customStyles,
             ]}
