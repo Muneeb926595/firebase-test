@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import { styles } from './styles'
 import { View } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
-import { useDispatch, } from 'react-redux'
+import { useDispatch, useSelector, } from 'react-redux'
 import { ScreenProps } from '../types'
 import { AppDropDownPicker, AppText, AuthInput, Button, Container, TextArea } from '../../components'
 import { Colors, Constants, Layout, } from '../../../globals'
 import { FormattedMessage } from '../../../localisations/locale-formatter'
 import { LocaleProvider } from '../../../localisations/locale-provider'
+import firestore from '@react-native-firebase/firestore';
+import { navigationRef } from '../../navigation'
 
 export const genderDropDownList = [
     {
@@ -28,6 +30,7 @@ export const genderDropDownList = [
 export const EditProfileScreen = (props: ScreenProps<'EditProfileScreen'>) => {
     const dispatch = useDispatch()
 
+    const { user } = useSelector(({ Homfford }: any) => Homfford.auth);
     const { control, handleSubmit, formState: { errors }, watch } = useForm({
         defaultValues: {
             age: '',
@@ -36,16 +39,19 @@ export const EditProfileScreen = (props: ScreenProps<'EditProfileScreen'>) => {
         }
     });
 
-    const handleRegister = (data) => {
-        const payload = {
-            name: data?.fullname?.trim(),
-            email: data?.email?.toLowerCase()?.trim(),
-            phone_number: data?.phoneNo?.trim(),
-            password: data?.password?.trim(),
-            gender: data?.gender,
-            address: data?.address?.trim(),
-            occupation: data?.occupation?.trim()
+    const handleRegister = async (data) => {
+        try {
+            // Update or add additional fields in Firestore
+            await firestore().collection('users').doc(user.uid).update({
+                age: data?.age?.trim(),
+                address: data?.address?.trim(),
+                gender: data?.gender,
+            });
+        } catch (error) {
+            console.error('Error updating user fields in Firestore:', error);
         }
+
+        navigationRef.goBack()
     }
 
     return (
