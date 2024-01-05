@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { ScreenProps } from '../../types'
 import { SvgXml } from 'react-native-svg'
-import { appLogoBlueIcon, googleLogoIcon } from '../../../components/icon/custome-icons'
+import { googleLogoIcon } from '../../../components/icon/custome-icons'
 
 
 export const LoginScreen = (props: ScreenProps<'LoginScreen'>) => {
@@ -42,7 +42,9 @@ export const LoginScreen = (props: ScreenProps<'LoginScreen'>) => {
       <View style={styles.container}>
         <View style={styles.screenContent} >
           <View style={{ alignSelf: 'center', marginBottom: Layout.heightPercentageToDP(5) }}>
-            <SvgXml xml={appLogoBlueIcon} />
+            <AppText style={styles.appLogo}>
+              <FormattedMessage id={LocaleProvider.IDs.label.firebaseTest} />
+            </AppText>
           </View>
 
           <AppText style={styles.title}>
@@ -51,21 +53,6 @@ export const LoginScreen = (props: ScreenProps<'LoginScreen'>) => {
           <AppText style={styles.titleDescription}>
             <FormattedMessage id={LocaleProvider.IDs.label.signinToYourAccount} />
           </AppText>
-
-          <View style={styles.existingUserLogin}>
-            <Button
-              buttonLable={LocaleProvider.formatMessage(LocaleProvider.IDs.label.signin)}
-              loading={loading}
-              onPress={handleSubmit(handleLogin)}
-              btnLabelStyles={{
-                color: Colors.white,
-              }}
-              buttonContainer={{
-                backgroundColor: Colors.brand['DEFAULT'],
-                marginTop: Layout.heightPercentageToDP(0.4)
-              }}
-            />
-          </View>
 
           <View style={styles.socialLoginsContainer}>
             <TouchableOpacity style={styles.socialLoginContainer}>

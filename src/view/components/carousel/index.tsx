@@ -10,7 +10,6 @@ import { Conditional } from '../conditional';
 import { FormattedMessage } from '../../../localisations/locale-formatter';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SvgXml } from 'react-native-svg';
-import { appLogoWhiteIcon } from '../icon/custome-icons';
 
 const renderListItem = ({ item }: any) => {
     return (
@@ -24,9 +23,9 @@ const renderListItem = ({ item }: any) => {
             }}>
             <SafeAreaView>
                 <View style={styles.container} >
-                    <View style={styles.appLogo}>
-                        <SvgXml xml={appLogoWhiteIcon} />
-                    </View>
+                    <AppText style={styles.appLogo}>
+                        <FormattedMessage id={LocaleProvider.IDs.label.firebaseTest} />
+                    </AppText>
                     <AppText style={styles.description}>
                         {item?.description}
                     </AppText>
@@ -38,7 +37,7 @@ const renderListItem = ({ item }: any) => {
 
 export const Carousel = ({ data, onComplete, onSkip }: any) => {
     const scrollX = new Animated.Value(0);
-    let position = Animated.divide(scrollX, Layout.window.width);
+    let position = Animated.divide(scrollX, Layout?.window?.width);
     const [currentPage, setCurrentPage] = useState(0);
     const flatListRef = useRef(null);
 
@@ -71,7 +70,7 @@ export const Carousel = ({ data, onComplete, onSkip }: any) => {
                     ref={flatListRef}
                     pagingEnabled
                     style={{
-                        backgroundColor: Colors.foreground
+                        backgroundColor: Colors?.foreground
                     }}
                     scrollEnabled
                     snapToAlignment="center"

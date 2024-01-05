@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: Layout.widthPercentageToDP(Layout.tiny),
   },
   tabContainer: {
-    width: Layout.half,
+    width: '50%',
     alignSelf: 'center',
   },
 });

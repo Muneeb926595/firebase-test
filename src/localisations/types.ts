@@ -97,6 +97,7 @@ export interface ILabelTexts extends IMessageGroup {
   readonly signinToYourAccount: string;
   readonly signin: string;
   readonly signinWithGoogle: string;
+  readonly firebaseTest: string;
 }
 
 export interface IGeneralMessages extends IMessageGroup {

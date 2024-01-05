@@ -28,7 +28,10 @@ export const styles = StyleSheet.create({
     borderRadius: Layout.widthPercentageToDP(1.5),
   },
   appLogo: {
-    alignSelf: 'center',
+    textAlign: 'center',
+    ...Fonts.poppinsBold,
+    fontSize: Layout.RFValue(32),
+    color: Colors.white,
   },
   carouselFooterContainer: {
     position: 'absolute',

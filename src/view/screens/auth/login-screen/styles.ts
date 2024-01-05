@@ -6,6 +6,11 @@ export const styles = StyleSheet.create({
   screenContent: {
     marginTop: Layout.heightPercentageToDP(1),
   },
+  appLogo: {
+    ...Fonts.poppinsBold,
+    color: Colors.brand['DEFAULT'],
+    fontSize: Layout.RFValue(32),
+  },
   input: {
     borderRadius: Layout.widthPercentageToDP(
       Layout.mini / Layout.divisionFactorForWidth,

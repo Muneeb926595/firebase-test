@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleProp, TextInput, TouchableOpacity, View, ViewStyle, } from 'react-native';
 import { styles } from './styles';
-import { Colors } from '../../../globals';
+import { Colors, Layout } from '../../../globals';
 import { Conditional } from '../conditional';
 import { AppIcon } from '../icon';
 import { AppIconName } from '../icon/types';
