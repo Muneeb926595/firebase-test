@@ -8,9 +8,48 @@ import { useSelector } from 'react-redux';
 import { FormattedMessage } from '../../../localisations/locale-formatter';
 import { LocaleProvider } from '../../../localisations/locale-provider';
 import firestore from '@react-native-firebase/firestore';
-import { Colors, Constants, Layout } from '../../../globals';
+import { Colors, Layout } from '../../../globals';
 import { Controller, useForm } from 'react-hook-form';
 
+const RenderItem = ({ item, updateBlogPost, deleteBlogPost }) => {
+    const { user } = useSelector(({ Homfford }: any) => Homfford.auth);
+    const [updatedTitle, setUpdatedTitle] = useState("")
+    const [updatedContent, setUpdatedContent] = useState("")
+    return (
+        <View style={{ marginTop: Layout.heightPercentageToDP(2) }}>
+            <AppText>{`Title: ${item.title}`}</AppText>
+            <AppText>{`Content: ${item.content}`}</AppText>
+            {user && user?.uid === item?.userId && (
+                <View style={{ ...Layout.shadowBox.lightestShadow, padding: Layout.widthPercentageToDP(2), borderRadius: Layout.widthPercentageToDP(2) }}>
+                    <TextInput
+                        placeholder="Updated Title"
+                        value={item?.updatedTitle || ''}
+                        onChangeText={setUpdatedTitle}
+                    />
+                    <TextInput
+                        placeholder="Updated Content"
+                        value={item?.updatedContent || ''}
+                        onChangeText={setUpdatedContent}
+                    />
+                    <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: Layout.widthPercentageToDP(2) }}>
+                        <Button
+                            buttonLable={"Update"}
+                            onPress={() => updateBlogPost(item?.id, updatedTitle, updatedContent)}
+                            buttonContainer={{ flex: 1, margin: Layout.zero, marginTop: Layout.heightPercentageToDP(1), backgroundColor: Colors.brand['DEFAULT'] }}
+                            btnLabelStyles={{ color: Colors.white }}
+                        />
+                        <Button
+                            buttonLable={"Delete"}
+                            onPress={() => deleteBlogPost(item?.id)}
+                            buttonContainer={{ flex: 1, margin: Layout.zero, marginTop: Layout.heightPercentageToDP(1), backgroundColor: `${Colors.red}AA` }}
+                            btnLabelStyles={{ color: Colors.white }}
+                        />
+                    </View>
+                </View>
+            )}
+        </View>
+    )
+}
 
 export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
     const { user } = useSelector(({ Homfford }: any) => Homfford.auth);
@@ -32,7 +71,7 @@ export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
         try {
             setLoading(true)
             const postsSnapshot = await firestore().collection('blogPosts').get();
-            const postsData = postsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            const postsData = postsSnapshot?.docs?.map((doc) => ({ id: doc.id, ...doc.data() }));
             setBlogPosts(postsData);
         } catch (error) {
             console.error('Error fetching blog posts:', error);
@@ -85,42 +124,7 @@ export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
         }
     };
 
-    const renderItem = ({ item }) => {
-        const [updatedTitle, setUpdatedTitle] = useState("")
-        const [updatedContent, setUpdatedContent] = useState("")
-        return (
-            <View>
-                <AppText>{`Title: ${item.title}`}</AppText>
-                <AppText>{`Content: ${item.content}`}</AppText>
-                {user && user.uid === item.userId && (
-                    <View>
-                        <TextInput
-                            placeholder="Updated Title"
-                            value={item?.updatedTitle || ''}
-                            onChangeText={setUpdatedTitle}
-                        />
-                        <TextInput
-                            placeholder="Updated Content"
-                            value={item?.updatedContent || ''}
-                            onChangeText={setUpdatedContent}
-                        />
-                        <Button
-                            buttonLable={"Update"}
-                            onPress={() => updateBlogPost(item?.id, updatedTitle, updatedContent)}
-                            buttonContainer={{ margin: Layout.zero, marginTop: Layout.heightPercentageToDP(10), backgroundColor: Colors.brand['DEFAULT'] }}
-                            btnLabelStyles={{ color: Colors.white }}
-                        />
-                        <Button
-                            buttonLable={"Delete"}
-                            onPress={() => deleteBlogPost(item?.id)}
-                            buttonContainer={{ margin: Layout.zero, marginTop: Layout.heightPercentageToDP(10), backgroundColor: Colors.brand['DEFAULT'] }}
-                            btnLabelStyles={{ color: Colors.white }}
-                        />
-                    </View>
-                )}
-            </View>
-        )
-    }
+
 
     return (
         <Container >
@@ -184,7 +188,7 @@ export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
                         </View>
                             : <FlatList
                                 data={blogPosts}
-                                renderItem={renderItem}
+                                renderItem={({ item }) => <RenderItem item={item} updateBlogPost={updateBlogPost} deleteBlogPost={deleteBlogPost} />}
                                 keyExtractor={(item) => item.id}
                             />
                     }
