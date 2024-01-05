@@ -4,7 +4,7 @@ import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-c
 import SplashScreen from 'react-native-splash-screen';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Provider } from 'react-redux';
-import firebase from '../firebase.js';
+import firebase from '../firebase.js'
 
 import { Constants } from './globals';
 import { LocaleProvider } from './localisations/locale-provider';
