@@ -128,6 +128,12 @@ export const SettingsScreen = injectIntl((props) => {
                 handleDeleteAccount()
                 break;
             case ApplicationSettings.Logout:
+                try {
+                    // Sign out the user
+                    await auth().signOut();
+                } catch (error) {
+                    console.error('Error logging out:', error);
+                }
                 dispatch(logoutUser() as any)
                 break;
         }
