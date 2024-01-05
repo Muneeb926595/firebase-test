@@ -5,7 +5,6 @@ declare global {
     user: any;
     selectedAppLanguage?: Languages;
     authenticated?: boolean;
-    showWelcomeMessage?: boolean;
     loading?: boolean;
   }
 }

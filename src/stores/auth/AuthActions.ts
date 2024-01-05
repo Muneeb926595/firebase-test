@@ -24,15 +24,6 @@ export const updateUser = user => {
   };
 };
 
-export const updateWelcomeMessageStatus = status => {
-  return dispatch => {
-    dispatch({
-      type: AuthActionTypes.UPDATE_WELCOME_MESSAGE,
-      payload: status,
-    });
-  };
-};
-
 export const logoutUser = () => {
   return dispatch => {
     dispatch({
