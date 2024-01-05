@@ -83,6 +83,8 @@ export interface IErrorMessages extends IMessageGroup {
   readonly nothingFound: string;
   readonly ageIsInvalid: string;
   readonly addressIsInvalid: string;
+  readonly titleIsRequired: string;
+  readonly contentIsRequired: string;
   readonly genderIsInvalid: string;
 }
 

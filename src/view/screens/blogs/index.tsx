@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, TextInput, View } from 'react-native';
 
 import { styles } from './styles';
@@ -24,6 +24,10 @@ export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
     const [blogPosts, setBlogPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        fetchBlogPosts()
+    }, [])
+
     const fetchBlogPosts = async () => {
         try {
             setLoading(true)
@@ -39,6 +43,7 @@ export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
 
     const createBlogPost = async (data) => {
         try {
+            setLoading(true)
             await firestore().collection('blogPosts').add({
                 title: data?.newPostTitle?.trim(),
                 content: data?.newPostContent?.trim(),
@@ -50,6 +55,8 @@ export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
             fetchBlogPosts();
         } catch (error) {
             console.error('Error creating blog post:', error);
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -119,10 +126,12 @@ export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
         <Container >
             <View style={styles.container}>
                 <View style={styles.screenContent} >
+                    <AppText style={styles.message}>
+                        Blogs
+                    </AppText>
                     <Controller
                         control={control}
                         rules={{
-                            pattern: Constants.REGEX_FULL_NAME,
                             required: true,
                         }}
                         render={({ field: { onChange, onBlur, value } }) => (
@@ -137,13 +146,12 @@ export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
                         name="newPostTitle"
                     />
                     {errors?.newPostTitle && <AppText style={styles.error} >
-                        <FormattedMessage id={LocaleProvider.IDs.error.ageIsInvalid} />
+                        <FormattedMessage id={LocaleProvider.IDs.error.titleIsRequired} />
                     </AppText>}
 
                     <Controller
                         control={control}
                         rules={{
-                            pattern: Constants.REGEX_FULL_NAME,
                             required: true,
                         }}
                         render={({ field: { onChange, onBlur, value } }) => (
@@ -158,23 +166,27 @@ export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
                         name="newPostContent"
                     />
                     {errors?.newPostContent && <AppText style={styles.error} >
-                        <FormattedMessage id={LocaleProvider.IDs.error.ageIsInvalid} />
+                        <FormattedMessage id={LocaleProvider.IDs.error.contentIsRequired} />
                     </AppText>}
 
                     <Button
                         buttonLable={LocaleProvider.formatMessage(LocaleProvider.IDs.label.submit)}
                         onPress={handleSubmit(createBlogPost)}
+                        loading={loading}
                         buttonContainer={{ margin: Layout.zero, marginTop: Layout.heightPercentageToDP(10), backgroundColor: Colors.brand['DEFAULT'] }}
                         btnLabelStyles={{ color: Colors.white }}
                     />
 
                     {/* List of blog posts */}
                     {
-                        loading ? <ActivityIndicator /> : <FlatList
-                            data={blogPosts}
-                            renderItem={renderItem}
-                            keyExtractor={(item) => item.id}
-                        />
+                        loading ? <View style={{ marginTop: Layout.heightPercentageToDP(16) }}>
+                            <ActivityIndicator />
+                        </View>
+                            : <FlatList
+                                data={blogPosts}
+                                renderItem={renderItem}
+                                keyExtractor={(item) => item.id}
+                            />
                     }
 
                 </View>

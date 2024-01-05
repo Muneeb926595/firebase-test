@@ -6,6 +6,8 @@
         "nothingFound": "Nada Encontrado",
         "addressIsInvalid": "La dirección no es válida",
         "ageIsInvalid": "La edad no es válida",
+        "titleIsRequired": "Se requiere título",
+        "contentIsRequired": "Se requiere contenido",
         "genderIsInvalid": "El género no es válido"
     },
     "general": {},

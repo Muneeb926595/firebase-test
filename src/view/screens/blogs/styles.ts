@@ -9,9 +9,10 @@ export const styles = StyleSheet.create({
   },
   message: {
     textAlign: 'center',
+    ...Fonts.poppinsBold,
     color: Colors.brand['DEFAULT'],
-    fontSize: Layout.RFValue(22),
-    ...Fonts.poppinsRegular,
+    fontSize: Layout.RFValue(28),
+    marginBottom: Layout.heightPercentageToDP(1.8),
   },
   error: {
     color: Colors.red,

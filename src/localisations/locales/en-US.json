@@ -6,6 +6,8 @@
         "nothingFound": "Nothing Found",
         "addressIsInvalid": "Address is invalid",
         "ageIsInvalid": "Age is invalid",
+        "titleIsRequired": "Title is required",
+        "contentIsRequired": "Content is required",
         "genderIsInvalid": "Gender is invalid"
     },
     "general": {
