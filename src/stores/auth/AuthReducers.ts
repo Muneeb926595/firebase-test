@@ -1,10 +1,12 @@
 import {AuthActionTypes} from './../redux/actionTypes';
 import {AuthState} from '../redux/state';
+import {Languages} from '../../view/screens/settings/types';
 
 const INITIAL_STATE: AuthState = {
   user: {},
   authenticated: false,
   loading: false,
+  selectedAppLanguage: Languages.English,
 };
 interface Action {
   payload: any;
@@ -29,6 +31,12 @@ const AuthReducer = (
         authenticated: false,
         user: null,
         loading: false,
+      };
+    }
+    case AuthActionTypes.SET_APP_LANGUAGE: {
+      return {
+        ...state,
+        selectedAppLanguage: action.payload,
       };
     }
     default: {

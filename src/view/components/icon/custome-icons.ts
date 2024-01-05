@@ -10,3 +10,7 @@ export const googleLogoIcon = `<svg width="24" height="24" viewBox="0 0 24 24" f
 export const facebookLogoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 <path d="M15.8092 3.985H18V0.169C17.622 0.117 16.3221 0 14.8083 0C7.87684 0 9.76269 7.85 9.48671 9H6V13.266H9.48571V24H13.7594V13.267H17.1041L17.635 9.001H13.7584C13.9463 6.177 12.9974 3.985 15.8092 3.985Z" fill="#0866FF"/>
 </svg>`;
+export const tickIconBlack = `<svg xmlns="http://www.w3.org/2000/svg" width="14.121" height="10.061" viewBox="0 0 14.121 10.061">
+<path id="Icon_feather-check" data-name="Icon feather-check" d="M18,9,9.75,17.25,6,13.5" transform="translate(-4.939 -7.939)" fill="none" stroke="#1E2E0D" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+</svg>
+`;

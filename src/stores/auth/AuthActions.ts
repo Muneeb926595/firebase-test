@@ -21,3 +21,12 @@ export const logoutUser = () => {
     });
   };
 };
+
+export const setAppLanguage = language => {
+  return dispatch => {
+    dispatch({
+      type: AuthActionTypes.SET_APP_LANGUAGE,
+      payload: language,
+    });
+  };
+};

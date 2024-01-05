@@ -98,6 +98,13 @@ export interface ILabelTexts extends IMessageGroup {
   readonly signin: string;
   readonly signinWithGoogle: string;
   readonly firebaseTest: string;
+  readonly language: string;
+  readonly edit: string;
+  readonly profile: string;
+  readonly english: string;
+  readonly spain: string;
+  readonly logout: string;
+  readonly deleteAccount: string;
 }
 
 export interface IGeneralMessages extends IMessageGroup {
