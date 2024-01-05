@@ -21,15 +21,17 @@ const RenderItem = ({ item, updateBlogPost, deleteBlogPost }) => {
             <AppText>{`Content: ${item.content}`}</AppText>
             {user && user?.uid === item?.userId && (
                 <View style={{ ...Layout.shadowBox.lightestShadow, padding: Layout.widthPercentageToDP(2), borderRadius: Layout.widthPercentageToDP(2) }}>
-                    <TextInput
+                    <AuthInput
                         placeholder="Updated Title"
-                        value={item?.updatedTitle || ''}
-                        onChangeText={setUpdatedTitle}
+                        value={updatedTitle || ''}
+                        onChange={setUpdatedTitle}
+                        onBlur={() => { }}
                     />
-                    <TextInput
+                    <AuthInput
                         placeholder="Updated Content"
-                        value={item?.updatedContent || ''}
-                        onChangeText={setUpdatedContent}
+                        value={updatedContent || ''}
+                        onChange={setUpdatedContent}
+                        onBlur={() => { }}
                     />
                     <View style={{ flexDirection: 'row', alignItems: 'center', columnGap: Layout.widthPercentageToDP(2) }}>
                         <Button
@@ -177,7 +179,7 @@ export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
                         buttonLable={LocaleProvider.formatMessage(LocaleProvider.IDs.label.submit)}
                         onPress={handleSubmit(createBlogPost)}
                         loading={loading}
-                        buttonContainer={{ margin: Layout.zero, marginTop: Layout.heightPercentageToDP(10), backgroundColor: Colors.brand['DEFAULT'] }}
+                        buttonContainer={{ margin: Layout.zero, marginTop: Layout.heightPercentageToDP(2), backgroundColor: Colors.brand['DEFAULT'] }}
                         btnLabelStyles={{ color: Colors.white }}
                     />
 
@@ -187,6 +189,7 @@ export const BlogsScreen = (props: TabScreenProps<'BlogsScreen'>) => {
                             <ActivityIndicator />
                         </View>
                             : <FlatList
+                                style={{ flex: 1 }}
                                 data={blogPosts}
                                 renderItem={({ item }) => <RenderItem item={item} updateBlogPost={updateBlogPost} deleteBlogPost={deleteBlogPost} />}
                                 keyExtractor={(item) => item.id}

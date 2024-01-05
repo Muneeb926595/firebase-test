@@ -5,6 +5,7 @@ import {Colors, Fonts, Layout} from '../../../globals';
 export const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: Colors.background},
   screenContent: {
+    flex: 1,
     paddingHorizontal: Layout.widthPercentageToDP(Layout.tiny),
   },
   message: {
