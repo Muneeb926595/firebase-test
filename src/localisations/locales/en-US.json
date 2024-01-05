@@ -29,6 +29,8 @@
         "settings": "Settings",
         "genderWithSterek": "Gender*",
         "profile": "Profile",
+        "welcomeMessage": "Hi welcome : {name}",
+        "notWelcomedHere": "Not welcomed here",
         "submit": "Submit",
         "enterYourAddress": "Enter your address*",
         "english": "English",

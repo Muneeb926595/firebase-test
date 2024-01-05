@@ -23,6 +23,8 @@
         "edit": "Editar",
         "home": "Hogar",
         "settings": "Ajustes",
+        "welcomeMessage": "Hola bienvenido : {name}",
+        "notWelcomedHere": "No bienvenido aquí",
         "profile": "Perfil",
         "submit": "Inscribirse",
         "enterYourAddress": "Ingresa tu dirección*",

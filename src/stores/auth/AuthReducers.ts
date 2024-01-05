@@ -6,6 +6,7 @@ const INITIAL_STATE: AuthState = {
   user: {},
   authenticated: false,
   loading: false,
+  showWelcomeMessage: true,
   selectedAppLanguage: Languages.English,
 };
 interface Action {
@@ -38,6 +39,12 @@ const AuthReducer = (
         ...state,
         user: {...state.user, ...action.payload},
         loading: false,
+      };
+    }
+    case AuthActionTypes.UPDATE_WELCOME_MESSAGE: {
+      return {
+        ...state,
+        showWelcomeMessage: action.payload,
       };
     }
     case AuthActionTypes.SET_APP_LANGUAGE: {

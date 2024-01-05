@@ -115,6 +115,8 @@ export interface ILabelTexts extends IMessageGroup {
   readonly logout: string;
   readonly deleteAccount: string;
   readonly genderWithSterek: string;
+  readonly welcomeMessage: string;
+  readonly notWelcomedHere: string;
 }
 
 export interface IGeneralMessages extends IMessageGroup {
